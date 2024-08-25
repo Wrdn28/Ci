@@ -1,10 +1,10 @@
 env:
-    credentials: "ENCRYPTED[!cfbfe2e2980e80f795fc4936a65a518896b7b9ef8ce8c95570cc5dafe8109b16a18f0217f1bb8bd540b427b3455bb634!]"
-    rcloneconfig: "ENCRYPTED[!be5045bfb4c1621825cb6898032cfcdb1f5a79d90ff1ba00079b582252e738b298a9371fb1c6ec7111871a38340f0725!]"
-    tokentl: "ENCRYPTED[!4e08bfb6719cf11eebdf252ad46eaf68fac38aa7651339a3b02a6722e3abfe339067b751956226e858af133a0626305c!]"
-    idtl: "ENCRYPTED[!ada2145d95983d2e2a41ae80fa27318da5a8980170db84992d9235c4dbcd190374eeeb76f47c815ab2ed55ddd087637d!]"
-    lunch: lunch qassa_sagit-user
-    make: make qassa
+    credentials: "ENCRYPTED[!6bbf28e53a99c334a6025271deadcd32c1c6f8a9c64acc2ef76309a710c93c35b9306e91ae7c7f68750881317f38a803!]"
+    rcloneconfig: "ENCRYPTED[!284b28dda43db3bded4f0653137bd823136bcaa58b14441b11a7d564b2ce1efe687b7da2d293fdd44f708d3f49114975!]"
+    tokentl: "ENCRYPTED[!a60db9a83996c1930eb90289b7bcbc03527aa7daf90b7ef561c359efa4d29abfb53cf399b7ae68d1bb74745ef71c12f1!]"
+    idtl: "-1001843746698"
+    lunch: lunch aospa_ginkgo-user
+    make: ./rom-build.sh ginkgo -t eng
 
 task:
   name: "Setting Up, Syncing, Building and Uploading..."
@@ -18,12 +18,12 @@ task:
        - export DEBIAN_FRONTEND=noninteractive
        - mkdir -p ~/.config/rclone
        - echo "$rcloneconfig" > ~/.rclone.conf
-       - git config --global user.name "denysaja"
-       - git config --global user.email "deny_saja@hotmail.com"
+       - git config --global user.name "Wrdn28"
+       - git config --global user.email "ifloraxd@gmail.com"
        - echo "$credentials" > ~/.git-credentials
        - git config --global credential.helper store --file=~/.git-credentials
        - mkdir -p ~/ccache
-       - rclone copy sagit:qassa/ccache.tar.gz ~/ -P
+       - rclone copy ginkgo:aospa/ccache.tar.gz ~/ -P
        - cd ~/
        - time tar xf ccache.tar.gz
        - cd ~/
@@ -40,26 +40,26 @@ task:
       - cd ~/rom
       - sudo curl --create-dirs -L -o /usr/local/bin/repoo -O -L https://storage.googleapis.com/git-repo-downloads/repo
       - sudo chmod a+rx /usr/local/bin/repoo
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/keepQASSA/manifest.git -b Q -g default,-mips,-darwin,-notdefault
-      - git clone --depth 1 https://github.com/deny2311/local_manifest.git -b qassa-sagit .repo/local_manifests
+      - repo init -q --no-repo-verify --depth=1 -u https://github.com/pa-hk/manifest.git -b uvite -g default,-mips,-darwin,-notdefault
+#      - git clone --depth 1 https://github.com/deny2311/local_manifest.git -b qassa-sagit .repo/local_manifests
       - rm -rf .repo/repo && git clone https://gerrit.googlesource.com/git-repo .repo/repo
-      - sed -i 's|ssh://git@github.com|https://github.com|g' .repo/manifests/snippets/qassa.xml
+ #     - sed -i 's|ssh://git@github.com|https://github.com|g' .repo/manifests/snippets/qassa.xml
 #      - repoo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8 --fail-fast
-      - repo sync -c -j8 --force-sync --no-clone-bundle --no-tags
-      - sed -i 's| -u||g' vendor/qassa/config/branding.mk
+      - repo sync --current-branch --no-tags -j8
+#      - sed -i 's| -u||g' vendor/qassa/config/branding.mk
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
 
   Build_script:
-      - export BUILD_USERNAME="deny2311"
-      - export BUILD_HOSTNAME="deny"
-      - export KBUILD_BUILD_USER="deny2311"
-      - export KBUILD_BUILD_HOST="deny"
+      - export BUILD_USERNAME="Hirokixd"
+      - export BUILD_HOSTNAME="HKprjkt"
+      - export KBUILD_BUILD_USER="hirokixd"
+      - export KBUILD_BUILD_HOST="HKprjkt"
 #      - export WITH_GAPPS=true
       - sudo ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build qassa for sagit Started!"
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build Aospa for Ginkgo Started!"
       - ./collect.sh
 #      - ./final.sh
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/sagit/ && ls qassa*.zip) Completed!"
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/ginkgo/ && ls aospa*.zip) Completed!"
 
   Upload_script:
       - ./upload.sh
@@ -67,6 +67,6 @@ task:
       - ./ziping.sh
       - cd ~/
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
-      - rclone copy ccache.tar.gz sagit:qassa -P
+      - rclone copy ccache.tar.gz ginkgo:aospa -P
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Ccache Uploaded Successfully!"
 
