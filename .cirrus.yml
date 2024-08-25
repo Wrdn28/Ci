@@ -52,7 +52,7 @@ task:
   Build_script:
       - export BUILD_USERNAME="Hirokixd"
       - export BUILD_HOSTNAME="HKprjkt"
-      - export KBUILD_BUILD_USER="hirokixd"
+      - export KBUILD_BUILD_USER="Hirokixd"
       - export KBUILD_BUILD_HOST="HKprjkt"
 #      - export WITH_GAPPS=true
       - sudo ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
@@ -69,4 +69,3 @@ task:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
       - rclone copy ccache.tar.gz ginkgo:aospa -P
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Ccache Uploaded Successfully!"
-
