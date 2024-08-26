@@ -1,6 +1,6 @@
 env:
     credentials: "ENCRYPTED[!ef153b13415d3e186733d124356bb48eacb07a158589c666e6533d9141267747dd0ab4f717c1d187307c43fff1d043f3!]"
-    rcloneconfig: "ENCRYPTED[!66e1d22f2e1c0c00cc84e26b58dfa65f0be2e98eef8e25c0d28b2365412df31f6790c46cdcb80fab662fc094a28ac3ff!]"
+    rcloneconfig: "ENCRYPTED[!1bedaed7f43928baa6a11be4d584934427fca1123b6c105226b976690d8c1c5bf2d7fde926cd8172c61ebde231724980!]"
     tokentl: "ENCRYPTED[!938691fa14b75a377db327200828af13a5888bad958c20d1609fbb08409ff31553a0347b6963d28c3ed8463f0f4afc41!]"
     idtl: -1002171624083
     lunch: lunch aospa_ginkgo-eng
