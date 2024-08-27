@@ -4,7 +4,7 @@ env:
     tokentl: "ENCRYPTED[!938691fa14b75a377db327200828af13a5888bad958c20d1609fbb08409ff31553a0347b6963d28c3ed8463f0f4afc41!]"
     idtl: -1002171624083
     lunch: lunch qassa_ginkgo-userdebug
-    make: mka qassa -j$(nproc --all)
+    make: make qassa
 
 task:
   name: "Setting Up, Syncing, Building and Uploading..."
