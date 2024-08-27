@@ -46,7 +46,7 @@ task:
       - repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
       - git clone https://github.com/Wrdn28/device_xiaomi_ginkgo-q -b qassa device/xiaomi/ginkgo
       - git clone https://github.com/Wrdn28/vendor_xiaomi_ginkgo-q -b A10 vendor/xiaomi/ginkgo
-      - git clone https://github.com/kutemeikito/android_kernel_xiaomi_ginkgo -b MiuiQ kernel/xiaomi/ginkgo --depth=1
+      - git clone https://github.com/ArrowOS-Devices/android_kernel_xiaomi_ginkgo -b arrow-10.0 kernel/xiaomi/ginkgo --depth=1
       - git clone https://github.com/andrraa/android_vendor_miuicamera -b 10 vendor/miuicamera
       - sed -i 's| -u||g' vendor/qassa/config/branding.mk
       - curl -s https://api.telegram.org/bot7502875437:AAHWCh1hQ9Wt8X3geAYSKk2T9mtRj8s9ehQ/sendMessage -d chat_id=-1002171624083 -d text="Sync Completed!"
