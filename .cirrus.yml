@@ -40,7 +40,7 @@ task:
       - cd ~/rom
       - sudo curl --create-dirs -L -o /usr/local/bin/repoo -O -L https://storage.googleapis.com/git-repo-downloads/repo
       - sudo chmod a+rx /usr/local/bin/repoo
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/keepQASSA/manifest.git -b Q -g default,-mips,-darwin,-notdefault
+      - repo init -u ssh://git@github.com/keepQASSA/manifest -b Q
       - rm -rf .repo/repo && git clone https://gerrit.googlesource.com/git-repo .repo/repo
       - repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
       - git clone https://github.com/Wrdn28/device_xiaomi_ginkgo-q -b qassa device/xiaomi/ginkgo
