@@ -1,10 +1,10 @@
 env:
-    credentials: "ENCRYPTED[!ef153b13415d3e186733d124356bb48eacb07a158589c666e6533d9141267747dd0ab4f717c1d187307c43fff1d043f3!]"
+    credentials: "Credentials = https://Wrdn28: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@github.com"
     rcloneconfig: "ENCRYPTED[!a35a96a766018615cf39e3a7585d7a73a85aa84c32ddb1d66e165737f1db87218fc6e9041b8fadb9fddf57484bf254db!]"
     tokentl: "ENCRYPTED[!938691fa14b75a377db327200828af13a5888bad958c20d1609fbb08409ff31553a0347b6963d28c3ed8463f0f4afc41!]"
     idtl: -1002171624083
-    lunch: lunch aospa_ginkgo-eng
-    make: ./rom-build.sh ginkgo -t eng
+    lunch: lunch qassa_ginkgo-userdebug
+    make: mka qassa -j$(nproc --all)
 
 task:
   name: "Setting Up, Syncing, Building and Uploading..."
@@ -23,7 +23,7 @@ task:
        - echo "$credentials" > ~/.git-credentials
        - git config --global credential.helper store --file=~/.git-credentials
        - mkdir -p ~/ccache
-       - rclone copy hk:aospa/ccache.tar.gz ~/ -P
+       - rclone copy hk:qassa/ccache.tar.gz ~/ -P
        - cd ~/
        - time tar xf ccache.tar.gz
        - cd ~/
@@ -35,18 +35,18 @@ task:
       - ./w.sh
 
   Sync_script:
-      - curl -s https://api.telegram.org/bot7502875437:AAHWCh1hQ9Wt8X3geAYSKk2T9mtRj8s9ehQ/sendMessage -d chat_id=-1002171624083 -d text="Start sync aospa Source"
+      - curl -s https://api.telegram.org/bot7502875437:AAHWCh1hQ9Wt8X3geAYSKk2T9mtRj8s9ehQ/sendMessage -d chat_id=-1002171624083 -d text="Start sync qassa Source"
       - mkdir -p ~/rom
       - cd ~/rom
       - sudo curl --create-dirs -L -o /usr/local/bin/repoo -O -L https://storage.googleapis.com/git-repo-downloads/repo
       - sudo chmod a+rx /usr/local/bin/repoo
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/pa-hk/manifest.git -b uvite -g default,-mips,-darwin,-notdefault
-      - git clone https://github.com/Wrdn28/local_manifest -b pa-14 .repo/local_manifests
+      - repo init -q --no-repo-verify --depth=1 -u https://github.com/keepQASSA/manifest.git -b Q -g default,-mips,-darwin,-notdefault
       - rm -rf .repo/repo && git clone https://gerrit.googlesource.com/git-repo .repo/repo
- #     - sed -i 's|ssh://git@github.com|https://github.com|g' .repo/manifests/snippets/qassa.xml
-#      - repoo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8 --fail-fast
-      - repo sync --current-branch --no-tags -j8
-#      - sed -i 's| -u||g' vendor/qassa/config/branding.mk
+      - repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+      - git clone https://github.com/Wrdn28/device_xiaomi_ginkgo-q -b qassa device/xiaomi/ginkgo
+      - git clone https://github.com/Wrdn28/vendor_xiaomi_ginkgo-q -b A10 vendor/xiaomi/ginkgo
+      - git clone https://github.com/kutemeikito/android_kernel_xiaomi_ginkgo -b MiuiQ kernel/xiaomi/ginkgo --depth=1
+      - git clone https://github.com/andrraa/android_vendor_miuicamera -b 10 vendor/miuicamera
       - curl -s https://api.telegram.org/bot7502875437:AAHWCh1hQ9Wt8X3geAYSKk2T9mtRj8s9ehQ/sendMessage -d chat_id=-1002171624083 -d text="Sync Completed!"
 
   Build_script:
@@ -56,10 +56,10 @@ task:
       - export KBUILD_BUILD_HOST="HKprjkt"
 #      - export WITH_GAPPS=true
       - sudo ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
-      - curl -s https://api.telegram.org/bot7502875437:AAHWCh1hQ9Wt8X3geAYSKk2T9mtRj8s9ehQ/sendMessage -d chat_id=-1002171624083 -d text="Build Aospa for Ginkgo Started!"
+      - curl -s https://api.telegram.org/bot7502875437:AAHWCh1hQ9Wt8X3geAYSKk2T9mtRj8s9ehQ/sendMessage -d chat_id=-1002171624083 -d text="Build Qassa for Ginkgo Started!"
       - ./collect.sh
 #      - ./final.sh
-      - curl -s https://api.telegram.org/bot7502875437:AAHWCh1hQ9Wt8X3geAYSKk2T9mtRj8s9ehQ/sendMessage -d chat_id=-1002171624083 -d text="Build $(cd ~/rom/out/target/product/ginkgo/ && ls aospa*.zip) Completed!"
+      - curl -s https://api.telegram.org/bot7502875437:AAHWCh1hQ9Wt8X3geAYSKk2T9mtRj8s9ehQ/sendMessage -d chat_id=-1002171624083 -d text="Build $(cd ~/rom/out/target/product/ginkgo/ && ls Qassa*.zip) Completed!"
 
   Upload_script:
       - ./upload.sh
@@ -67,6 +67,6 @@ task:
       - ./ziping.sh
       - cd ~/
       - curl -s https://api.telegram.org/bot7502875437:AAHWCh1hQ9Wt8X3geAYSKk2T9mtRj8s9ehQ/sendMessage -d chat_id=-1002171624083 -d text="Uploading ccache...."
-      - rclone copy ccache.tar.gz hk:aospa -P
+      - rclone copy ccache.tar.gz hk:qassa -P
       - curl -s https://api.telegram.org/bot7502875437:AAHWCh1hQ9Wt8X3geAYSKk2T9mtRj8s9ehQ/sendMessage -d chat_id=-1002171624083 -d text="Ccache Uploaded Successfully!"
-#
+
