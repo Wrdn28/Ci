@@ -1,5 +1,5 @@
 env:
-    credentials: "Credentials = https://Wrdn28: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@github.com"
+    credentials: "ENCRYPTED[!478222776a397420786daccaaf06a26427d3ddda97ae4ccb31bdf6899dcd1e9a9118ca59f0a1ff93f6e7eda09b1f9249!]"
     rcloneconfig: "ENCRYPTED[!a35a96a766018615cf39e3a7585d7a73a85aa84c32ddb1d66e165737f1db87218fc6e9041b8fadb9fddf57484bf254db!]"
     tokentl: "ENCRYPTED[!938691fa14b75a377db327200828af13a5888bad958c20d1609fbb08409ff31553a0347b6963d28c3ed8463f0f4afc41!]"
     idtl: -1002171624083
