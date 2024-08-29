@@ -49,6 +49,10 @@ task:
       - git clone https://github.com/Wrdn28/hyper_kernel_ginkgo -b A10 kernel/xiaomi/ginkgo --depth=1
       - git clone https://github.com/andrraa/android_vendor_miuicamera -b 10 vendor/miuicamera
       - git clone https://github.com/kdrag0n/proton-clang -b master prebuilts/clang/host/linux-x86/proton-clang --depth=1
+      - rm -rf hardware/qcom-caf/sm8150/audio && rm -rf hardware/qcom-caf/sm8150/display && rm -rf hardware/qcom-caf/sm8150/media
+      - git clone https://github.com/Nusantara-ROM/android_hardware_qcom_display -b 10-sm8150 hardware/qcom-caf/sm8150/display
+      - git clone https://github.com/Nusantara-ROM/android_hardware_qcom_media -b 10-sm8150 hardware/qcom-caf/sm8150/media
+      - git clone https://github.com/Nusantara-ROM/android_hardware_qcom_audio -b 10-sm8150 hardware/qcom-caf/sm8150/audio 
       - sed -i 's| -u||g' vendor/qassa/config/branding.mk
       - curl -s https://api.telegram.org/bot7502875437:AAHWCh1hQ9Wt8X3geAYSKk2T9mtRj8s9ehQ/sendMessage -d chat_id=-1002171624083 -d text="Sync Completed!"
 
