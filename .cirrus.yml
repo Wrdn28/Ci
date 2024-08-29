@@ -1,6 +1,6 @@
 env:
     credentials: "ENCRYPTED[!478222776a397420786daccaaf06a26427d3ddda97ae4ccb31bdf6899dcd1e9a9118ca59f0a1ff93f6e7eda09b1f9249!]"
-    rcloneconfig: "ENCRYPTED[!a35a96a766018615cf39e3a7585d7a73a85aa84c32ddb1d66e165737f1db87218fc6e9041b8fadb9fddf57484bf254db!]"
+    rcloneconfig: "ENCRYPTED[!34f7d21857daea6b023049dfe7bfeb3fd7edbaef2ae54d3110533b500e7a3bb1556e19b28543a5aa2b755bd0acef986c!]"
     tokentl: "ENCRYPTED[!938691fa14b75a377db327200828af13a5888bad958c20d1609fbb08409ff31553a0347b6963d28c3ed8463f0f4afc41!]"
     idtl: -1002171624083
     lunch: lunch nad_ginkgo-user
@@ -23,7 +23,7 @@ task:
        - echo "$credentials" > ~/.git-credentials
        - git config --global credential.helper store --file=~/.git-credentials
        - mkdir -p ~/ccache
-       - rclone copy hk:nusantara/ccache.tar.gz ~/ -P
+       - rclone copy hk1:nusantara/ccache.tar.gz ~/ -P
        - cd ~/
        - time tar xf ccache.tar.gz
        - cd ~/
@@ -40,7 +40,7 @@ task:
       - cd ~/rom
       - sudo curl --create-dirs -L -o /usr/local/bin/repoo -O -L https://storage.googleapis.com/git-repo-downloads/repo
       - sudo chmod a+rx /usr/local/bin/repoo
-      - repo init -q --no-repo-verify --depth=1 -u repo init -u https://github.com/S-A-build/android_manifest_nusa  -b 10 -g default,-mips,-darwin,-notdefault
+      - repo init -q --no-repo-verify --depth=1 -u https://github.com/S-A-build/android_manifest_nusa -b 10 -g default,-mips,-darwin,-notdefault
       - rm -rf .repo/repo && git clone https://gerrit.googlesource.com/git-repo .repo/repo
       - sed -i 's|ssh://git@github.com|https://github.com|g' .repo/manifests/snippets/projects.xml
       - repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
@@ -70,5 +70,5 @@ task:
       - ./ziping.sh
       - cd ~/
       - curl -s https://api.telegram.org/bot7502875437:AAHWCh1hQ9Wt8X3geAYSKk2T9mtRj8s9ehQ/sendMessage -d chat_id=-1002171624083 -d text="Uploading ccache...."
-      - rclone copy ccache.tar.gz hk:nusantara -P
+      - rclone copy ccache.tar.gz hk1:nusantara -P
       - curl -s https://api.telegram.org/bot7502875437:AAHWCh1hQ9Wt8X3geAYSKk2T9mtRj8s9ehQ/sendMessage -d chat_id=-1002171624083 -d text="Ccache Uploaded Successfully!"
