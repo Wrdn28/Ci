@@ -49,7 +49,7 @@ task:
       - git clone https://github.com/Wrdn28/hyper_kernel_ginkgo -b 10 kernel/xiaomi/ginkgo --depth=1
       - git clone https://github.com/andrraa/android_vendor_miuicamera -b 10 vendor/miuicamera
       - git clone https://github.com/kdrag0n/proton-clang -b master prebuilts/clang/host/linux-x86/proton-clang --depth=1
-      - rm rf vendor/qcom/opensource/commonsys/bluetooth_ext
+      - rm -rf vendor/qcom/opensource/commonsys/bluetooth_ext
       - git clone https://github.com/Wrdn28/android_vendor_qcom_opensource_bluetooth_ext -b lineage-17.1 vendor/qcom/opensource/commonsys/bluetooth_ext
       - sed -i 's| -u||g' vendor/nusantara/config/branding.mk
       - curl -s https://api.telegram.org/bot7502875437:AAHWCh1hQ9Wt8X3geAYSKk2T9mtRj8s9ehQ/sendMessage -d chat_id=-1002171624083 -d text="Sync Completed!"
